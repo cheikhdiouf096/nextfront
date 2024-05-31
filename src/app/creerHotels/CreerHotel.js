@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios'; // Assurez-vous que axios est importé
 import Image from 'next/image';
+import "animate.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faImage } from '@fortawesome/free-solid-svg-icons';
 import {
@@ -75,7 +76,7 @@ const CreerHotel = () => {
 
     try {
       const res = await axios.post(
-        "https://localhost:3000/api/hotels",
+        "https://projetstage1backend.onrender.com/api/hotels",
         formDataToSend
       );
 
@@ -109,15 +110,22 @@ const CreerHotel = () => {
     }
   };
 
+  const [showModal, setShowModal] = useState(false);
+
+  const handleClose = () => {
+    setShowModal(false); // Afficher le formulaire de création d'hôtel
+  };
+  
+
   return (
-    <Container>
+    <Container className='animate__animated animate__bounce animate__backInDown'>
       <Card>
         <Header>
-          <a href="/cardHotel">
-            <ButtonModal>
+          {/* <a href="/cardHotel"> */}
+            <ButtonModal onClick={handleClose}>
               <FontAwesomeIcon icon={faArrowLeft} />
             </ButtonModal>
-          </a>
+          {/* </a> */}
           <Title>Créer un nouveau hôtel</Title>
         </Header>
         <Form onSubmit={handleSubmit}>
@@ -214,6 +222,7 @@ const CreerHotel = () => {
                 type="file"
                 accept='images/*'
                 onChange={handleFileChange}
+                style={{display: "none"}}
               />
             </Dropzone>
           </Footer>

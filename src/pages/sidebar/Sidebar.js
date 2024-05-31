@@ -1,11 +1,11 @@
 "use client"
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft, faChevronRight, faHome } from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft, faChevronRight, faHome, faRightToBracket } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
 import Image from 'next/image';
 import iconRed from "../../app/assets/icon.png";
-import { Div1, Div2, Div3, Div4, List, ListLi, Onligne, OnligneFlex, ProfileBas, ProfileBasMere, ProfileTextBas, RedProductTitle, SidebarContainer, SidebarContainer2, SidebarHeader, SidebarList, SignOut, StyledSidebarNav, ToggleButton, ToggleWrapper } from '../../styles/Sidebar.Style';
+import { Div1, Div2, Div3, Div4, List, ListLi, Onligne, OnligneFlex, ProfileBas, ProfileBasMere, ProfileName, ProfileTextBas, RedProductTitle, SidebarContainer, SidebarContainer2, SidebarHeader, SidebarList, SignOut, StyledSidebarNav, ToggleButton, ToggleWrapper } from '../../styles/Sidebar.Style';
 import "bootstrap/dist/css/bootstrap.min.css";
 import ProfileAdmin from "../../app/assets/pro.png"
 import { IconButton, ProfileAdminImage, ProfileImage } from '../../styles/Navabar.Style';
@@ -68,10 +68,16 @@ const Sidebar = () => {
                                 <ProfileAdminImage src={ProfileAdmin} alt='Profile Admin' width={40} height={40} />
                             </ProfileImage>
                             <ProfileTextBas>
-                                Mouhamet Badiane
+                                <ProfileName>Mouhamed Badiane</ProfileName>
                                 <OnligneFlex><Onligne></Onligne> en ligne</OnligneFlex>
                             </ProfileTextBas>
                         </ProfileBas>
+
+                        <SignOut onClick={handleSignOut}>
+                            <IconButton>
+                                <FontAwesomeIcon icon={faRightToBracket} color="white" size='2x'/>
+                            </IconButton>
+                        </SignOut>
 
                         </ProfileBasMere>
 

@@ -187,6 +187,14 @@ export const ProfileBas = styled.div`
 export const ProfileBasMere = styled.div`
   position: relative;
   top: 260px;
+
+
+  @media (min-width: 1024px) {
+    top: 180px;
+  }
+  @media (min-width: 1240px) {
+    top: 260px;
+  }
 `
 
 export const ProfileTextBas = styled.div`
@@ -214,4 +222,8 @@ export const SignOut = styled.button`
   background: none;
   border: none;
 
+`
+
+export const ProfileName = styled.span`
+  font-size: 12px;
 `
