@@ -61,7 +61,7 @@ const Inscription = () => {
     }
 
     try {
-      const res = await fetch("https://projetstage1backend.onrender.com/api/auth/register", {
+      const res = await fetch("https://nextback.onrender.com/api/auth/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

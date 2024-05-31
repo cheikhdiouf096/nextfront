@@ -57,7 +57,7 @@ const EditHotelComponent = () => {
 
   const fetchHotelData = async () => {
     try {
-      const response = await axios.get(`https://projetstage1backend.onrender.com/api/hotels/${hotelId}`);
+      const response = await axios.get(`https://nextback.onrender.com/api/hotels/${hotelId}`);
       setFormData({
         nameHotel: response.data.nameHotel,
         address: response.data.address,
@@ -102,7 +102,7 @@ const EditHotelComponent = () => {
     }
 
     try {
-      const res = await fetch(`https://projetstage1backend.onrender.com/api/hotels/${hotelId}`, {
+      const res = await fetch(`https://nextback.onrender.com/api/hotels/${hotelId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

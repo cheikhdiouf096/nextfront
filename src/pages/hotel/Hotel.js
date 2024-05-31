@@ -56,13 +56,15 @@ import CreerHotel from "../../app/creerHotels/CreerHotel"
 const Hotel = () => {
   const [hotels, setHotels] = useState([]);
   const [nombre, setNombre] = useState(0);
-  const [seeButtons, setSeeButtons] = useState(null);
   const [error, setError] = useState(null);
-  const [showModal, setShowModal] = useState(false);
-  const [selectedHotel, setSelectedHotel] = useState(null);
-  const [showCreateForm, setShowCreateForm] = useState(false);
   const [text, setText] = useState('Créer un nouvel hôtel'); // Nouvel état pour le texte du bouton
   const [currentHotelIndex, setCurrentHotelIndex] = useState(0); // État pour suivre l'index actuel de l'hôtel
+
+  //voir les modals
+  const [seeButtons, setSeeButtons] = useState(null);
+  const [selectedHotel, setSelectedHotel] = useState(null);
+  const [showCreateForm, setShowCreateForm] = useState(false);
+  const [showViewModal, setShowViewModal] = useState(false);
 
   useEffect(() => {
     fetchData();
@@ -70,7 +72,7 @@ const Hotel = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get("https://projetstage1backend.onrender.com/api/hotels");
+      const response = await axios.get("https://nextback.onrender.com/api/hotels");
       setHotels(response.data);
       setNombre(response.data.length);
     } catch (error) {
@@ -87,7 +89,7 @@ const Hotel = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`https://projetstage1backend.onrender.com/api/hotels/${id}`);
+      await axios.delete(`https://nextback.onrender.com/api/hotels/${id}`); 
       setHotels(hotels.filter(hotel => hotel._id !== id));
     } catch (error) {
       setError('Erreur lors de la suppression de l\'hôtel.');
@@ -143,7 +145,7 @@ const Hotel = () => {
         </Header2Container>
       </Navbar2Container>
 
-      {showModal && selectedHotel && (
+      {showViewModal && selectedHotel && (
         <ModalDetails className="animate__animated animate__bounce animate__backInDown">
           <ModalMere>
             <ModalTitle>{selectedHotel.nameHotel}</ModalTitle>
@@ -167,7 +169,7 @@ const Hotel = () => {
               </div>
             </LeftRight>
           </ModalMere>
-          <ModalBtnClose onClick={() => setShowModal(false)}>Fermer</ModalBtnClose>
+          <ModalBtnClose onClick={() => setShowViewModal(false)}>Fermer</ModalBtnClose>
           <ModalBtnEdit>
             <Link href={`/Edit?id=${selectedHotel._id}`}>Modifier</Link>
           </ModalBtnEdit>
@@ -178,7 +180,7 @@ const Hotel = () => {
         </ModalDetails>
       )}
 
-      {!showCreateForm && !showModal && (
+      {!showCreateForm && !showViewModal && (
         <SecContent>
           {hotels.map((hotel, index) => (
             <SingleDestination key={hotel._id} data-aos="fade-up">
@@ -197,7 +199,7 @@ const Hotel = () => {
                           <FontAwesomeIcon icon={faEdit} color="yellow" />
                         </Link>
                       </TIcons>
-                      <TIcons onClick={() => setShowModal(true)}>
+                      <TIcons onClick={() => setShowViewModal(true)}>
                         <FontAwesomeIcon icon={faEye} color="skyblue" />
                       </TIcons>
                     </SeeAllButtons>

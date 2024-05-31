@@ -47,7 +47,7 @@ export const StyledFrm = styled.form`
   padding: 1.5rem 1.5rem;
 `;
 
-export const StyledFrmInput = styled.form`
+export const StyledFrmInput = styled.div`
   margin-bottom: 0.75rem; 
 `;
 
