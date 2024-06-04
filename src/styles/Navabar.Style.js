@@ -115,7 +115,7 @@ export const LogoutIcon = styled.div`
 
 `;
 
-export const IconButton = styled.button`
+export const IconButton = styled.div`
   background: none;
   border: none;
 `;

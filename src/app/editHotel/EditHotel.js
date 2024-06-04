@@ -3,7 +3,7 @@
 import React, { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faImage } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import {
   Container,
@@ -20,19 +20,18 @@ import {
   StyledFrInput,
   StyledSubmitCreer,
   Footer,
+  DivImage2,
+  Dropzone,
 } from '../../styles/Creer.Style';
 import { ButtonModal } from '../../styles/Navbar2.Style';
-import { ErrorMessage, SuccessMessage } from '../../styles/Connexion.Style';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Image from 'next/image';
 
 const EditHotelComponent = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const hotelId = searchParams.get('id');
-
-  const [message, setMessage] = useState("");
-  const [isError, setIsError] = useState(false);
-  const [timeoutId, setTimeoutId] = useState(null);
-  const [hotels, setHotels] = useState([]);
 
   const [formData, setFormData] = useState({
     nameHotel: '',
@@ -41,6 +40,7 @@ const EditHotelComponent = () => {
     price: '',
     number: '',
     devise: '',
+    image: '',
   });
 
   const handleChange = (e) => {
@@ -48,6 +48,17 @@ const EditHotelComponent = () => {
     setFormData({
       ...formData,
       [name]: value,
+    });
+  };
+
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setSelectedImage(file);
+    setFormData({
+      ...formData,
+      image: file,
     });
   };
 
@@ -65,22 +76,11 @@ const EditHotelComponent = () => {
         price: response.data.price,
         number: response.data.number,
         devise: response.data.devise,
+        image: response.data.image
       });
     } catch (error) {
       console.error('Erreur lors de la récupération des données:', error);
-      setIsError(true);
-      setMessage("Une erreur s'est produite lors de la récupération des données");
-      const id = setTimeout(resetMessage, 5000);
-      setTimeoutId(id);
-    }
-  };
-
-  const resetMessage = () => {
-    setMessage("");
-    setIsError(false);
-    if (timeoutId) {
-      clearTimeout(timeoutId);
-      setTimeoutId(null);
+      toast.error("Une erreur s'est produite lors de la récupération des données");
     }
   };
 
@@ -94,44 +94,40 @@ const EditHotelComponent = () => {
       !formData.number ||
       !formData.price
     ) {
-      setIsError(true);
-      setMessage('Les champs ne doivent pas être vides.');
-      const id = setTimeout(resetMessage, 5000);
-      setTimeoutId(id);
+      toast.error('Les champs ne doivent pas être vides.');
       return;
+    }
+
+    const form = new FormData();
+    form.append('nameHotel', formData.nameHotel);
+    form.append('address', formData.address);
+    form.append('email', formData.email);
+    form.append('price', formData.price);
+    form.append('number', formData.number);
+    form.append('devise', formData.devise);
+    if (selectedImage) {
+      form.append('image', selectedImage);
     }
 
     try {
       const res = await fetch(`https://nextback.onrender.com/api/hotels/${hotelId}`, {
         method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
+        body: form,
       });
 
       const result = await res.json();
 
       if (res.ok) {
-        setIsError(false);
-        setMessage("Hotel updated successfully!");
         console.log('Update successful:', result);
-        const id = setTimeout(resetMessage, 5000);
-        setTimeoutId(id);
         router.push('/cardHotel');
+        toast.success("Hotel updated successfully!");
       } else {
-        setIsError(true);
-        setMessage(result.message || "Update failed. Please try again.");
+        toast.error(result.message || "Update failed. Please try again.");
         console.log('Update failed:', result);
-        const id = setTimeout(resetMessage, 5000);
-        setTimeoutId(id);
       }
     } catch (error) {
       console.error("Error updating form:", error);
-      setIsError(true);
-      setMessage("An error occurred. Please try again.");
-      const id = setTimeout(resetMessage, 5000);
-      setTimeoutId(id);
+      toast.error("An error occurred. Please try again.");
     }
   };
 
@@ -209,12 +205,39 @@ const EditHotelComponent = () => {
               </StyledFrInput>
             </FrGr2oup>
           </Row>
+          <Footer>
+            <Label htmlFor="file">Appuie sur l'image pour changer d'image</Label>
+            <Dropzone htmlFor="dropzone-file">
+              {selectedImage ? (
+                <Image
+                  src={URL.createObjectURL(selectedImage)}
+                  alt="selected-img"
+                  width={300}
+                  height={200}
+                />
+              ) : (
+                <img
+                  src={formData.image}
+                  alt="selected-img"
+                  width={300}
+                  height={200}
+                />
+              )}
+              <Input
+                id="dropzone-file"
+                type="file"
+                accept='images/*'
+                onChange={handleFileChange}
+                style={{display: "none"}}
+              />
+            </Dropzone>
+          </Footer>
           <FlexEnd>
             <StyledSubmitCreer type="submit">Mettre à jour</StyledSubmitCreer>
           </FlexEnd>
         </Form>
-        {message && (isError ? <ErrorMessage>{message}</ErrorMessage> : <SuccessMessage>{message}</SuccessMessage>)}
       </Card>
+      <ToastContainer />
     </Container>
   );
 };

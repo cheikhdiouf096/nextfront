@@ -1,11 +1,15 @@
 'use client'
 
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Link from "next/link";
 import iconRed from "../assets/icon.png";
 import Image from "next/image";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useRouter } from "next/navigation";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import {
   StyledCheckboxContainer,
   StyledCheckboxInput,
@@ -23,10 +27,14 @@ import {
   StyledSignupLien,
   StyledSubmitButton,
   StyledText,
-  ErrorMessage
+  ErrorMessage,
+  ShowHideButton,
+  IconDiv,
+  IconDivBtn
 } from "../../styles/Connexion.Style";
 
 const Connexion = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const [values, setValues] = useState({
     email: "",
     password: "",
@@ -60,11 +68,17 @@ const Connexion = () => {
         throw new Error("Invalid credentials");
       }
 
-      router.replace("/dashboard"); // Rediriger vers le tableau de bord après une connexion réussie
+      router.replace("/dashboard"); // Redirect to the dashboard after successful login
+      toast.success('Connexion réussie');
+
     } catch (error) {
-      setError("Invalid credentials");
+      toast.error('Invalid credentials');
       setTimeout(resetMessage, 5000);
     }
+  };
+
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
   };
 
   return (
@@ -91,13 +105,18 @@ const Connexion = () => {
             </StyledFrmInput>
             <StyledFrmInput>
               <StyledFrmLabel htmlFor="password">Mot de passe</StyledFrmLabel>
-              <StyledInput
-                id="password"
-                name="password"
-                type="password"
-                value={values.password}
-                onChange={handleChange}
-              />
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <StyledInput
+                  id="password"
+                  name="password"
+                  type={showPassword ? "text" : "password"}
+                  value={values.password}
+                  onChange={handleChange}
+                />
+                <IconDivBtn type="button" onClick={toggleShowPassword}>
+                  <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+                </IconDivBtn>
+              </div>
             </StyledFrmInput>
             {error && <ErrorMessage>{error}</ErrorMessage>}
             <StyledCheckboxContainer>
@@ -119,6 +138,8 @@ const Connexion = () => {
           Vous n'avez pas de compte?{" "}
           <Link href="/inscription">Inscription</Link>
         </StyledSignupLien>
+        
+        <ToastContainer />
       </StyledContainer>
     </>
   );

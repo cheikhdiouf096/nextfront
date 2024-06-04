@@ -4,9 +4,9 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios'; // Assurez-vous que axios est importé
 import Image from 'next/image';
-import "animate.css"
+import "animate.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faImage } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faImage } from '@fortawesome/free-solid-svg-icons'; 
 import {
   Container,
   Card,
@@ -93,10 +93,12 @@ const CreerHotel = () => {
           image: null
         });
 
+        setShowModal(false)
         setSeletedImage(null);
         setMessage("Hotel created successfully!");
         setTimeout(resetMessage, 5000);
         router.push('/cardHotel');
+        window.location.reload();
       } else {
         setIsError(true);
         setMessage(res.data.message || "Registration failed. Please try again.");
@@ -110,7 +112,7 @@ const CreerHotel = () => {
     }
   };
 
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(true);
 
   const handleClose = () => {
     setShowModal(false); // Afficher le formulaire de création d'hôtel
@@ -118,7 +120,8 @@ const CreerHotel = () => {
   
 
   return (
-    <Container className='animate__animated animate__bounce animate__backInDown'>
+    <>
+      {showModal && <Container className='animate__animated animate__bounce animate__fadeIn'>
       <Card>
         <Header>
           {/* <a href="/cardHotel"> */}
@@ -232,7 +235,8 @@ const CreerHotel = () => {
         </Form>
         {message && (isError ? <ErrorMessage>{message}</ErrorMessage> : <SuccessMessage>{message}</SuccessMessage>)}
       </Card>
-    </Container>
+    </Container>}
+    </>
   );
 };
 

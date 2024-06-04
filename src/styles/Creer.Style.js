@@ -8,7 +8,7 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   padding: 24px 0;
-  background-color: rgba(255,255,0, 0.2);
+
   @media (min-width: 640px) {
     padding: 26px 0;
   }
@@ -17,14 +17,14 @@ export const Container = styled.div`
 export const Card = styled.div`
   width: 100%;
   max-width: 40rem; /* equivalent to max-w-xl */
-  background-color: rgba(255,255,0, 0.2);
+  background-color: white;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   padding: 1rem;
-  margin-bottom: 1crem;
+  margin-bottom: 1rem;
+  opacity: 1;
+
 `;
-
-
 
 export const Header = styled.div`
   display: flex;
@@ -52,7 +52,7 @@ export const Row = styled.div`
 
 export const FrGr2oup = styled.div`
   flex: 1;
-  min-width: 280px; /* ensures inputs are responsive */ 
+  min-width: 280px; /* ensures inputs are responsive */
 `;
 
 export const Label = styled.label`

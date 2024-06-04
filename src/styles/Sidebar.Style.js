@@ -186,14 +186,12 @@ export const ProfileBas = styled.div`
 `
 export const ProfileBasMere = styled.div`
   position: relative;
-  top: 260px;
-
 
   @media (min-width: 1024px) {
-    top: 180px;
+    top: 0px;
   }
-  @media (min-width: 1240px) {
-    top: 260px;
+  @media (min-width: 1280px) {
+    top: 200px;
   }
 `
 
