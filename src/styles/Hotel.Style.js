@@ -10,6 +10,7 @@ export const SecContent = styled.div`
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
   margin-top: 2rem;
+  margin-bottom: 2rem;
 
   @media screen and (min-width: 320px) {
     grid-template-columns: repeat(1, 1fr);
