@@ -166,7 +166,7 @@ const Hotel = () => {
             <DivNav2>
               <TitleContainer>
                 <FlexContainer>
-                  <Title aria-current="page">Dashboard</Title>
+                  <Title aria-current="page">Listes des hotels</Title>
                 </FlexContainer>
               </TitleContainer>
               <Toolbar>

@@ -4,6 +4,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelopeOpen, faUserFriends } from '@fortawesome/free-solid-svg-icons';
 import { faP } from '@fortawesome/free-solid-svg-icons/faP';
 import { BorderIcon, CardContainer, CardInfo, Content, IconRow, Number, Partie, StyledPrice } from '../../styles/Card.Style';
+
+
+
+
 const Data = [
   {
     id: 1,

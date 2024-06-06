@@ -34,7 +34,7 @@ const Navbar2 = () => {
             <Navbar2Div2>
               <Title2Container>
                 <Flex2Container>
-                  <Title2 aria-current="page">Dashboard</Title2>
+                  <Title2 aria-current="page">xxxxx</Title2>
                 </Flex2Container>
               </Title2Container>
               <Toolbar2>
