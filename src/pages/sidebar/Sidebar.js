@@ -75,7 +75,7 @@ const Sidebar = () => {
                                 <ProfileAdminImage src={ProfileAdmin} alt='Profile Admin' width={40} height={40} />
                             </ProfileImage>
                             <ProfileTextBas>{user ? 
-                                (<ProfileName> {user.user.name}</ProfileName>) 
+                                (<ProfileName> {user.name}</ProfileName>) 
                                             :
                                 (<ProfileName>Vous n'êtes pas connecté.</ProfileName>)
                                 }
