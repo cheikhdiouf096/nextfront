@@ -18,28 +18,11 @@ const Sidebar = () => {
     const [isSidebarActive, setSidebarActive] = useState(false);
     const [chevron, setChevron] = useState(false);
     const router = useRouter();
-    // const user = useUser();
-    // const [user, setUser] = useState(null);
     const { user } = useUser();
 
     console.log("user:", user); 
 
 
-    // const fetchUserData = async () => {
-    //     try {
-    //       const response = await axios.get('http://localhost:8000/api/auth'); // Adjust the URL as needed          
-    //     } catch (error) {
-    //       console.error('Error fetching user data:', error);
-    //     }
-    //   };
-
-
-    //   const utulisateur = fetchUserData();
-      
-    
-    //   useEffect(() => {
-    //     utulisateur;
-    //   }, []);
 
     const toggleSidebar = () => {
         setSidebarActive(!isSidebarActive);
@@ -92,7 +75,7 @@ const Sidebar = () => {
                                 <ProfileAdminImage src={ProfileAdmin} alt='Profile Admin' width={40} height={40} />
                             </ProfileImage>
                             <ProfileTextBas>{user ? 
-                                (<ProfileName> {user.name}</ProfileName>) 
+                                (<ProfileName> {user.user.name}</ProfileName>) 
                                             :
                                 (<ProfileName>Vous n'êtes pas connecté.</ProfileName>)
                                 }
