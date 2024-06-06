@@ -1,3 +1,4 @@
+"use client"
 import 'react-toastify/dist/ReactToastify.css';
 import { useUser } from '../userContext';
 import "bootstrap/dist/css/bootstrap.min.css";
