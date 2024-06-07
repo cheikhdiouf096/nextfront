@@ -18,9 +18,11 @@ const Sidebar = () => {
     const [isSidebarActive, setSidebarActive] = useState(false);
     const [chevron, setChevron] = useState(false);
     const router = useRouter();
-    const  user  = useUser();
+    const  data  = useUser();
+    const user = data.user 
 
-    console.log("user:", user); 
+    console.log("data:", data); 
+    console.log("user:", user);
 
 
 
