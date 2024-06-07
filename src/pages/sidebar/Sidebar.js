@@ -19,10 +19,6 @@ const Sidebar = () => {
     const [chevron, setChevron] = useState(false);
     const router = useRouter();
     const   user   =  useUser();
-    
-
-     console.log(user.user.name);
-
 
     const toggleSidebar = () => {
         setSidebarActive(!isSidebarActive);
