@@ -5,7 +5,7 @@ import { faChevronLeft, faChevronRight, faHome, faRightToBracket } from '@fortaw
 import Link from 'next/link';
 import Image from 'next/image';
 import iconRed from "../../app/assets/icon.png";
-import { Div1, Div2, Div3, Div4, List, ListLi, Onligne, OnligneFlex, ProfileBas, ProfileBasMere, ProfileName, ProfileTextBas, RedProductTitle, SidebarContainer, SidebarContainer2, SidebarHeader, SidebarList, SignOut, StyledSidebarNav, ToggleButton, ToggleWrapper } from '../../styles/Sidebar.Style';
+import { Div1, Div2, Div3, Div4, List, ListLi, Onligne, Offligne, OnligneFlex, ProfileBas, ProfileBasMere, ProfileName, ProfileTextBas, RedProductTitle, SidebarContainer, SidebarContainer2, SidebarHeader, SidebarList, SignOut, StyledSidebarNav, ToggleButton, ToggleWrapper } from '../../styles/Sidebar.Style';
 import "bootstrap/dist/css/bootstrap.min.css";
 import ProfileAdmin from "../../app/assets/pro.png"
 import { IconButton, ProfileAdminImage, ProfileImage } from '../../styles/Navabar.Style';
@@ -71,11 +71,11 @@ const Sidebar = () => {
                                 <ProfileAdminImage src={ProfileAdmin} alt='Profile Admin' width={40} height={40} />
                             </ProfileImage>
                             <ProfileTextBas>{user ? 
-                                (<ProfileName> {user.user.name}</ProfileName>) 
+                                (<ProfileName> {user.user.name}<OnligneFlex><Onligne></Onligne> en ligne</OnligneFlex></ProfileName>) 
                                             :
-                                (<ProfileName>Vous n'êtes pas connecté.</ProfileName>)
+                                (<ProfileName><OnligneFlex><Offligne></Offligne> off line</OnligneFlex></ProfileName>)
                                 }
-                                <OnligneFlex><Onligne></Onligne> en ligne</OnligneFlex>
+                                
                             </ProfileTextBas>
                         </ProfileBas>
 
